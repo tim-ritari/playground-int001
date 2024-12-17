@@ -1,0 +1,18 @@
+name: My first action
+on: 
+  push:
+    branches:
+      -main
+jobs:
+  deployStaging:
+    name: Deploy to Staging
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Azure Login
+        uses: Azure/login@v1
+        with:
+          creds: ${{ secreds.AZURE_CREDENTIALS}}
+  
