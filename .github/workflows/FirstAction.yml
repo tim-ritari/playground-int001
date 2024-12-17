@@ -6,8 +6,15 @@ on:
   workflow_dispatch:
 
 jobs:
-  armDeploy:
+  armDeploySandbox:
+    name: Deploy to Sandbox
     runs-on: ubuntu-latest
+    env:
+      subscriptionId: 0929d555-466f-4f2b-9354-a455f36b9732
+      resource_group_name: rg-githubactions
+      location: Australia East
+    environment:
+      name: Sandbox
 
     steps:
       - uses: actions/checkout@v2
@@ -21,7 +28,7 @@ jobs:
         uses: Azure/arm-deploy@v2
         with:
           scope: subscription
-          subscriptionId: 0929d555-466f-4f2b-9354-a455f36b9732
+          subscriptionId: ${{env.subscriptionId}}
           region: Australia East
           template: ./arm-templates/resourcegroup.json
           deploymentName: rg-githubactions
@@ -32,8 +39,7 @@ jobs:
         with:
           scope: resourcegroup
           resourceGroupName: rg-githubactions
-          subscriptionId: 0929d555-466f-4f2b-9354-a455f36b9732
+          subscriptionId: ${{env.subscriptionId}}
           template: ./arm-templates/storageaccount.json
           parameters: ./arm-templates/storageaccount.parameters.json
           deploymentMode: incremental
-      
