@@ -80,7 +80,7 @@ jobs:
           id: storageAccountDeploy
           with:
             scope: resourcegroup
-            resourceGroupName:  resourceGroupName: ${{env.resource_group_name}}
+            resourceGroupName: ${{env.resource_group_name}}
             subscriptionId: ${{env.subscriptionId}}
             template: ./arm-templates/storageaccount.json
             parameters: ./arm-templates/storageaccount.parameters.json
