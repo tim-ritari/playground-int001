@@ -81,5 +81,8 @@ jobs:
             resourceGroupName: rg-githubactions
             subscriptionId: ${{env.subscriptionId}}
             template: ./arm-templates/storageaccount.json
-            parameters: ./arm-templates/storageaccount.parameters.json
+            parameters: 
+              sku=Standard_LRS
+              storageAccountName=nonoodlesstg002
+              location=${{env.location}}
             deploymentMode: incremental
