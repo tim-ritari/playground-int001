@@ -53,6 +53,8 @@ jobs:
         location: Australia East
       environment:
         name: Production
+      
+      needs: armDeploySandbox  
 
       steps:
         - uses: actions/checkout@v2
