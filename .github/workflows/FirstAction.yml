@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       subscriptionId: 0929d555-466f-4f2b-9354-a455f36b9732
-      resource_group_name: rg-githubactions
+      resource_group_name: rg-githubactions-Sandbox
       location: Australia East
     environment:
       name: Sandbox
@@ -28,8 +28,9 @@ jobs:
         uses: Azure/arm-deploy@v2
         with:
           scope: subscription
+          resourceGroupName: ${{env.resource_group_name}}
           subscriptionId: ${{env.subscriptionId}}
-          region: Australia East
+          region: ${{env.location}} 
           template: ./arm-templates/resourcegroup.json
           deploymentName: rg-githubactions
           
@@ -38,7 +39,7 @@ jobs:
         id: storageAccountDeploy
         with:
           scope: resourcegroup
-          resourceGroupName: rg-githubactions
+          resourceGroupName: ${{env.resource_group_name}}
           subscriptionId: ${{env.subscriptionId}}
           template: ./arm-templates/storageaccount.json
           parameters: ./arm-templates/storageaccount.parameters.json
@@ -49,7 +50,7 @@ jobs:
       runs-on: ubuntu-latest
       env:
         subscriptionId: 2e3ff3b2-094d-4496-9ed2-5d98f43e21b1
-        resource_group_name: rg-githubactions
+        resource_group_name: rg-githubactions-Prod
         location: Australia East
       environment:
         name: Production
@@ -68,8 +69,9 @@ jobs:
           uses: Azure/arm-deploy@v2
           with:
             scope: subscription
+            resourceGroupName: ${{env.resource_group_name}}
             subscriptionId: ${{env.subscriptionId}}
-            region: Australia East
+            region: ${{env.location}} 
             template: ./arm-templates/resourcegroup.json
             deploymentName: rg-githubactions
             
@@ -78,7 +80,7 @@ jobs:
           id: storageAccountDeploy
           with:
             scope: resourcegroup
-            resourceGroupName: rg-githubactions
+            resourceGroupName:  resourceGroupName: ${{env.resource_group_name}}
             subscriptionId: ${{env.subscriptionId}}
             template: ./arm-templates/storageaccount.json
             parameters: ./arm-templates/storageaccount.parameters.json
