@@ -17,7 +17,7 @@ jobs:
         with:
           creds: ${{secrets.AZURE_CREDENTIALS}}
       
-      - name: Deploy rg-githubaction
+      - name: Deploy Resource Group "rg-githubaction"
         uses: Azure/arm-deploy@v2
         with:
           scope: subscription
@@ -26,4 +26,13 @@ jobs:
           template: ./arm-templates/resourcegroup.json
           deploymentName: rg-githubactions
           
+      - name: Deploy Storage Account
+        uses: Azure/arm-deploy@v2
+        with:
+          scope: resourcegroup
+          resourceGroupName: rg-githubactions
+          subscriptionId: 2e3ff3b2-094d-4496-9ed2-5d98f43e21b1
+          template: ./arm-templates/storageaccount.json
+          parameters: ./arm-templates/storageaccount.parameters.json
+          deploymentMode: incremental
       
