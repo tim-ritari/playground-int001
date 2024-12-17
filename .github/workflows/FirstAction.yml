@@ -1,11 +1,9 @@
-name: My first action
+name: armTemplateDeployment
 on: 
-  push:
-    branches:
-      -main
+  workflow_dispatch:
+
 jobs:
-  deployStaging:
-    name: Deploy to Staging
+  arnDeploy:
     runs-on: ubuntu-latest
 
     steps:
@@ -14,5 +12,4 @@ jobs:
       - name: Azure Login
         uses: Azure/login@v1
         with:
-          creds: ${{ secreds.AZURE_CREDENTIALS}}
-  
+          creds: ${{secrets.AZURE_CREDENTIALS}}
