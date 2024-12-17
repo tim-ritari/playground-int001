@@ -43,3 +43,41 @@ jobs:
           template: ./arm-templates/storageaccount.json
           parameters: ./arm-templates/storageaccount.parameters.json
           deploymentMode: incremental
+  
+  armDeployProduction:
+      name: Deploy to Production
+      runs-on: ubuntu-latest
+      env:
+        subscriptionId: 2e3ff3b2-094d-4496-9ed2-5d98f43e21b1
+        resource_group_name: rg-githubactions
+        location: Australia East
+      environment:
+        name: Production
+
+      steps:
+        - uses: actions/checkout@v2
+
+        - name: Azure Login
+          uses: Azure/login@v1
+          with:
+            creds: ${{secrets.AZURE_CREDENTIALS}}
+        
+        - name: Deploy Resource Group "rg-githubaction"
+          uses: Azure/arm-deploy@v2
+          with:
+            scope: subscription
+            subscriptionId: ${{env.subscriptionId}}
+            region: Australia East
+            template: ./arm-templates/resourcegroup.json
+            deploymentName: rg-githubactions
+            
+        - name: Deploy Storage Account
+          uses: Azure/arm-deploy@v2
+          id: storageAccountDeploy
+          with:
+            scope: resourcegroup
+            resourceGroupName: rg-githubactions
+            subscriptionId: ${{env.subscriptionId}}
+            template: ./arm-templates/storageaccount.json
+            parameters: ./arm-templates/storageaccount.parameters.json
+            deploymentMode: incremental
