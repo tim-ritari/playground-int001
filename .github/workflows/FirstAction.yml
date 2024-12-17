@@ -84,5 +84,5 @@ jobs:
             parameters: 
               sku=Standard_LRS
               storageAccountName=nonoodlesstg002
-              location= Australia Central
+              location="Australia Central"
             deploymentMode: incremental
