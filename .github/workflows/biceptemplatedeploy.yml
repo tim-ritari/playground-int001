@@ -32,7 +32,7 @@ jobs:
           type: deployment
           operation: create
           name: Development
-          location: swedencentral
+          location: westus2
           scope: subscription
           subscription-id: ${{ env.subscriptionid }}
           resource-group-name: ${{ env.resource_group_name }}
