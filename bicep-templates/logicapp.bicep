@@ -5,8 +5,26 @@ resource LogicApp 'Microsoft.Logic/workflows@2019-05-01' = {
   location: location
   properties: {
     definition: {
-      '': 'https://schema.management.azure.com/schemas/2016-06-01/Microsoft.Logic.json'
+      $schema: 'https://schema.management.azure.com/schemas/2016-06-01/Microsoft.Logic.json' // schema URL
       contentVersion: '1.0.0.0'
+      actions: {
+        HttpAction: {
+          type: 'Http'
+          inputs: {
+            method: 'GET'
+            uri: 'https://example.com'
+          }
+        }
+      }
+      triggers: {
+        RecurrenceTrigger: {
+          type: 'Recurrence'
+          recurrence: {
+            frequency: 'Day'
+            interval: 1
+          }
+        }
+      }
     }
   }
 }
