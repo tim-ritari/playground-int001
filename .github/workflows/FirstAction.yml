@@ -44,7 +44,7 @@ jobs:
           parameters: ./arm-templates/storageaccount.parameters.json
           deploymentMode: incremental
       
-          - name: Deploy Virtual Machine
+      - name: Deploy Virtual Machine
         uses: Azure/arm-deploy@v2
         with:
           scope: resourcegroup
