@@ -17,17 +17,17 @@ jobs:
             resource_group_name: Customer01-Int001-RG-Sandbox
             location: Sweden Central
 
-        Steps:
-            -uses: actions/checkout@v2
+        steps:
+            - uses: actions/checkout@v2
 
-            -name: Azure Login
-            uses: Azure/login@v1
-            with:
+            - name: Azure Login
+              uses: Azure/login@v1
+              with:
                 creds: ${{secrets.AZURE_CREDENTIALS}}
 
-            -name: Deploy Bicep
-            uses: azure/bicep-deploy@v1
-            with:
+            - name: Deploy Bicep
+              uses: azure/bicep-deploy@v1
+              with:
                   type: deployment
                   operation: create
                   name: Development
