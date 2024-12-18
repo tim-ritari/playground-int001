@@ -43,7 +43,19 @@ jobs:
           template: ./arm-templates/storageaccount.json
           parameters: ./arm-templates/storageaccount.parameters.json
           deploymentMode: incremental
-  
+      
+          - name: Deploy Virtual Machine
+        uses: Azure/arm-deploy@v2
+        with:
+          scope: resourcegroup
+          resourceGroupName: rg-githubactions
+          subscriptionId: ${{env.subscriptionId}}
+          template: ./arm-templates/virtualmachine.json
+          parameters:
+            adminPassword:"MySecurePassword!"
+          deploymentMode: incremental
+    
+          
   armDeployProduction:
       name: Deploy to Production
       runs-on: ubuntu-latest
