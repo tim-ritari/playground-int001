@@ -26,7 +26,7 @@ jobs:
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-      - name: Deploy Bicep
+      - name: Deploy resource group - "${{env.resource_group_name}}""
         uses: azure/bicep-deploy@v1
         with:
           type: deployment
@@ -37,6 +37,23 @@ jobs:
           subscription-id: ${{ env.subscriptionid }}
           resource-group-name: ${{ env.resource_group_name }}
           template-file: ./bicep-templates/resourcegroup.bicep
+          parameters: |
+            {
+              "resourceGroupName": "${{ env.resource_group_name }}",
+              "location": "${{ env.location }}"
+            }
+                    
+        - name: Deploy Logic App - "}""
+        uses: azure/bicep-deploy@v1
+        with:
+          type: deployment
+          operation: create
+          name: Development
+          location: westus2
+          scope: resourceGroup
+          subscription-id: ${{ env.subscriptionid }}
+          resource-group-name: ${{ env.resource_group_name }}
+          template-file: ./bicep-templates/virtualnetwork.bicep
           parameters: |
             {
               "resourceGroupName": "${{ env.resource_group_name }}",
