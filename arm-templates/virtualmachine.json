@@ -7,10 +7,31 @@
             "metadata": {
                 "description": "Enter the password for the admin account on this machine"
             }
+        },
+        "location": {
+            "type": "string",
+            "metadata": {
+                "description": "The location of the resources"
+            }
+        },
+        "vmSize": {
+            "type": "string",
+            "metadata": {
+                "description": "The size of the virtual machine"
+            }
         }
     },
     "functions": [],
-    "variables": {},
+    "variables": {
+        "networkSecurityGroupName": "nsg1",
+        "networkSecurityGroupName2": "nsg2",
+        "vNetName": "vnet1",
+        "vNetSubnetName": "subnet1",
+        "vNetAddressPrefixes": "10.0.0.0/16",
+        "vNetSubnetAddressPrefix": "10.0.1.0/24",
+        "networkInterfaceName": "nic1",
+        "vmName": "vm1"
+    },
     "resources": [
         {
             "type": "Microsoft.Network/networkSecurityGroups",
@@ -37,7 +58,6 @@
             }
         },
         {
-            "comments": "Simple Network Security Group for subnet [variables('vNetSubnetName')]",
             "type": "Microsoft.Network/networkSecurityGroups",
             "apiVersion": "2024-03-01",
             "name": "[variables('networkSecurityGroupName2')]",
@@ -46,7 +66,7 @@
                 "securityRules": [
                     {
                         "name": "default-allow-22",
-                        "properties": { 
+                        "properties": {
                             "priority": 1000,
                             "access": "Allow",
                             "direction": "Inbound",
@@ -101,7 +121,7 @@
                     {
                         "name": "ipconfig1",
                         "properties": {
-                            "privateIPAllocationMethod": "Dynamic", 
+                            "privateIPAllocationMethod": "Dynamic",
                             "subnet": {
                                 "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', variables('vNetName'), variables('vNetSubnetName'))]"
                             }
@@ -125,8 +145,7 @@
                 "osProfile": {
                     "computerName": "ubuntuVM1",
                     "adminUsername": "Tim",
-                    "adminPassowrd":"[parameters('adminPassword')]"
-                    }
+                    "adminPassword": "[parameters('adminPassword')]"
                 },
                 "storageProfile": {
                     "imageReference": {
