@@ -1,5 +1,5 @@
 param resourceGroupName string
-param location string
+param location string = resourceGroup().location
 
 resource LogicApp 'Microsoft.Logic/workflows@2019-05-01' = {
   name: 'Customer01-Int01-Publish-LA-Sandbox'
