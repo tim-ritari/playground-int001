@@ -16,7 +16,7 @@ jobs:
 
     env:
       resource_group_name: Customer01-Int001-RG-Sandbox
-      location: westus2
+      location: swedencentral
 
     steps:
       - uses: actions/checkout@v2
@@ -32,7 +32,7 @@ jobs:
           type: deployment
           operation: create
           name: Development
-          location: westus2
+          location: swedencentral
           scope: subscription
           subscription-id: ${{ env.subscriptionid }}
           resource-group-name: ${{ env.resource_group_name }}
