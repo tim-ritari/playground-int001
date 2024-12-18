@@ -1,7 +1,14 @@
 {
     "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
-    "parameters": {},
+    "parameters": {
+        "location": {
+            "type": "string",
+            "metadata": {
+                "description": "Enter the location for deployeing the Logic App"
+            }
+        }
+    },
     "functions": [],
     "variables": {},
     "resources": [
@@ -9,7 +16,7 @@
             "name": "logicApp-Publish",
             "type": "Microsoft.Logic/workflows",
             "apiVersion": "2017-07-01",
-            "location": "australiaeast",
+            "location": "[parameters('location')",
             "properties": {
                 "definition": {
                     "$schema": "https://schema.management.azure.com/schemas/2016-06-01/Microsoft.Logic.json",

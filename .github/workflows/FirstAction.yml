@@ -42,7 +42,9 @@ jobs:
           scope: resourceGroup
           subscription-id: ${{env.subscriptionId}}
           resource-group-name: rg-githubactions
-          template-file: ./arm-templates/logicapp1.json        
+          template-file: ./arm-templates/logicapp1.json
+          parameters:
+            location=westus2       
 
       - name: Deploy Storage Account
         uses: Azure/arm-deploy@v2
@@ -90,11 +92,12 @@ jobs:
             type: deployment
             operation: create
             name: Development
-            location: westus2
             scope: resourceGroup
             subscription-id: ${{env.subscriptionId}}
             resource-group-name: rg-githubactions
-            template-file: ./arm-templates/logicapp1.json        
+            template-file: ./arm-templates/logicapp1.json
+            parameters:
+              location=westus2          
             
         - name: Deploy Storage Account
           uses: Azure/arm-deploy@v2
