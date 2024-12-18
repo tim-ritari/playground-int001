@@ -43,7 +43,7 @@ jobs:
               "location": "${{ env.location }}"
             }
                     
-        - name: Deploy Logic App - "}""
+      - name: Deploy Logic App - "}""
         uses: azure/bicep-deploy@v1
         with:
           type: deployment
