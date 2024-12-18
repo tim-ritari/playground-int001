@@ -33,7 +33,7 @@ jobs:
           operation: create
           name: Development
           location: westus2
-          scope: resourceGroup
+          scope: subscription
           subscription-id: ${{ env.subscriptionid }}
           resource-group-name: ${{ env.resource_group_name }}
           template-file: ./bicep-templates/resourcegroup.bicep
