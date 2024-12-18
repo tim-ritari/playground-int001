@@ -32,6 +32,18 @@ jobs:
           region: ${{env.location}} 
           template: ./arm-templates/resourcegroup.json
           deploymentName: rg-githubactions
+         
+      - name: Create Logic App
+        uses: azure/bicep-deploy@v1
+        with:
+          type: deployment
+          operation: create
+          name: Development
+          location: westus2
+          scope: resourceGroup
+          subscription-id: ${{env.subscriptionId}}
+          resource-group-name: rg-githubactions
+          template-file: ./arm-templates/logicapp1.json        
 
       - name: Deploy Storage Account
         uses: Azure/arm-deploy@v2
@@ -53,6 +65,8 @@ jobs:
           template: ./arm-templates/virtualmachine.json
           parameters:
             adminPassword="MySecurePassword!"
+            location="Australia East"
+            vmSize=B1ms
           deploymentMode: incremental
     
           
@@ -84,6 +98,18 @@ jobs:
             region: Australia East
             template: ./arm-templates/resourcegroup.json
             deploymentName: rg-githubactions
+
+        - name: Create Logic App
+          uses: azure/bicep-deploy@v1
+          with:
+            type: deployment
+            operation: create
+            name: Development
+            location: westus2
+            scope: resourceGroup
+            subscription-id: ${{env.subscriptionId}}
+            resource-group-name: rg-githubactions
+            template-file: ./arm-templates/logicapp1.json        
             
         - name: Deploy Storage Account
           uses: Azure/arm-deploy@v2
