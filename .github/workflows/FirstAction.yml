@@ -41,7 +41,7 @@ jobs:
           type: deployment
           operation: create
           name: Development
-          location: "westus
+          location: westus
           scope: resourceGroup
           subscription-id: ${{env.subscriptionId}}
           resource-group-name: ${{env.resource_group_name}}
