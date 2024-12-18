@@ -16,7 +16,7 @@ jobs:
 
     env:
       resource_group_name: Customer01-Int001-RG-Sandbox
-      location: Sweden Central
+      location: westus2
 
     steps:
       - uses: actions/checkout@v2
