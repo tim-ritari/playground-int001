@@ -3,7 +3,7 @@ name: "Bicep Deployish Workflow"
 on:
     push:
         branches:
-            -main
+            - main
     workflow_dispatch:
 
 env:
@@ -38,5 +38,5 @@ jobs:
                   resource-group-name: ${{env.resource_group_name}}
                   template-file: ./bicep-templates/resourcegroup.bicep
                   parameters:
-                    resourceGroupName=${{env.resource_group_name}}
-                    location=${{env.location}} 
+                    resourceGroupName="${{env.resource_group_name}}"
+                    location="${{env.location}}" 
