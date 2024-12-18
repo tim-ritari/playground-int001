@@ -41,6 +41,7 @@ jobs:
           type: deployment
           operation: create
           name: Development
+          location: "${{env.location}}"
           scope: resourceGroup
           subscription-id: ${{env.subscriptionId}}
           resource-group-name: ${{env.resource_group_name}}
@@ -92,6 +93,7 @@ jobs:
             type: deployment
             operation: create
             name: Development
+            location: "${{env.location}}"
             scope: resourceGroup
             subscription-id: ${{env.subscriptionId}}
             resource-group-name: ${{env.resource_group_name}}
