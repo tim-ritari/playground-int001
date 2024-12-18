@@ -54,4 +54,6 @@ jobs:
           resource-group-name: ${{ env.resource_group_name }}
           template-file: ./bicep-templates/logicapp.bicep
           parameters: |
-           location: ${{ env.location }}
+            {
+              "location": "${{ env.location }}"
+            }
