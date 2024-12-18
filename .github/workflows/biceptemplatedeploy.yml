@@ -49,7 +49,6 @@ jobs:
           type: deployment
           operation: create
           name: Development
-          location: westus2
           scope: resourceGroup
           subscription-id: ${{ env.subscriptionid }}
           resource-group-name: ${{ env.resource_group_name }}
