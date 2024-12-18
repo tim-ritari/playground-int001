@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       subscriptionId: 0929d555-466f-4f2b-9354-a455f36b9732
-      resource_group_name: rg-githubactions
+      resource_group_name: Customer-Int001-RG-Sandbox
       location: Australia East
     environment:
       name: Sandbox
@@ -24,14 +24,14 @@ jobs:
         with:
           creds: ${{secrets.AZURE_CREDENTIALS}}
       
-      - name: Deploy Resource Group "rg-githubaction"
+      - name: Deploy Resource Group ${{env.resource_group_name}}
         uses: Azure/arm-deploy@v2
         with:
           scope: subscription
           subscriptionId: ${{env.subscriptionId}}
           region: ${{env.location}} 
           template: ./arm-templates/resourcegroup.json
-          deploymentName: rg-githubactions
+          deploymentName: ${{env.resource_group_name}}
          
       - name: Create Logic App
         uses: azure/bicep-deploy@v1
@@ -41,7 +41,7 @@ jobs:
           name: Development
           scope: resourceGroup
           subscription-id: ${{env.subscriptionId}}
-          resource-group-name: rg-githubactions
+          resource-group-name: ${{env.resource_group_name}}
           template-file: ./arm-templates/logicapp1.json
           parameters:
             location=westus2       
@@ -51,7 +51,7 @@ jobs:
         id: storageAccountDeploy
         with:
           scope: resourcegroup
-          resourceGroupName: rg-githubactions
+          resourceGroupName: ${{env.resource_group_name}}
           subscriptionId: ${{env.subscriptionId}}
           template: ./arm-templates/storageaccount.json
           parameters: ./arm-templates/storageaccount.parameters.json
@@ -62,7 +62,7 @@ jobs:
       runs-on: ubuntu-latest
       env:
         subscriptionId: 2e3ff3b2-094d-4496-9ed2-5d98f43e21b1
-        resource_group_name: rg-githubactions
+        resource_group_name: Customer-Int001-RG-Prod
         location: Australia East
       environment:
         name: Production
@@ -84,7 +84,7 @@ jobs:
             subscriptionId: ${{env.subscriptionId}}
             region: Australia East
             template: ./arm-templates/resourcegroup.json
-            deploymentName: rg-githubactions
+            deploymentName: ${{env.resource_group_name}}
 
         - name: Create Logic App
           uses: azure/bicep-deploy@v1
@@ -94,7 +94,7 @@ jobs:
             name: Development
             scope: resourceGroup
             subscription-id: ${{env.subscriptionId}}
-            resource-group-name: rg-githubactions
+            resource-group-name: ${{env.resource_group_name}}
             template-file: ./arm-templates/logicapp1.json
             parameters:
               location=westus2          
@@ -104,7 +104,7 @@ jobs:
           id: storageAccountDeploy
           with:
             scope: resourcegroup
-            resourceGroupName: rg-githubactions
+            resourceGroupName: ${{env.resource_group_name}}
             subscriptionId: ${{env.subscriptionId}}
             template: ./arm-templates/storageaccount.json
             parameters: 
