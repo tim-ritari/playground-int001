@@ -65,7 +65,7 @@ jobs:
           parameters:
             adminPassword="MySecurePassword!"
             location="Australia East"
-            vmSize=B1ms
+            vmSize=Standard_L8s_v3
           deploymentMode: incremental
     
           
