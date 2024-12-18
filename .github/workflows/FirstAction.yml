@@ -43,8 +43,6 @@ jobs:
           subscription-id: ${{env.subscriptionId}}
           resource-group-name: ${{env.resource_group_name}}
           template-file: ./arm-templates/logicapp1.json
-          parameters:
-            location=westus2       
 
       - name: Deploy Storage Account
         uses: Azure/arm-deploy@v2
@@ -96,8 +94,6 @@ jobs:
             subscription-id: ${{env.subscriptionId}}
             resource-group-name: ${{env.resource_group_name}}
             template-file: ./arm-templates/logicapp1.json
-            parameters:
-              location=westus2          
             
         - name: Deploy Storage Account
           uses: Azure/arm-deploy@v2
