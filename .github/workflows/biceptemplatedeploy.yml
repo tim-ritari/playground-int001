@@ -10,7 +10,7 @@ env:
 
 jobs:
     bicepAzCliDeploy:
-        name: : Bicep AZ Deploy Job
+        name: Bicep AZ Deploy Job
         runs-on: ubuntu-latest
 
         env:
