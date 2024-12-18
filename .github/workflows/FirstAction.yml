@@ -39,7 +39,6 @@ jobs:
           type: deployment
           operation: create
           name: Development
-          location: Australia Central
           scope: resourceGroup
           subscription-id: ${{env.subscriptionId}}
           resource-group-name: rg-githubactions
