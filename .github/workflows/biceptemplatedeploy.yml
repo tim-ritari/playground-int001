@@ -1,42 +1,44 @@
 name: "Bicep Deployish Workflow"
 
 on:
-    push:
-        branches:
-            - main
-    workflow_dispatch:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
 
 env:
-    subscriptionid: 0929d555-466f-4f2b-9354-a455f36b9732
+  subscriptionid: 0929d555-466f-4f2b-9354-a455f36b9732
 
 jobs:
-    bicepAzCliDeploy:
-        name: Bicep AZ Deploy Job
-        runs-on: ubuntu-latest
+  bicepAzCliDeploy:
+    name: Bicep AZ Deploy Job
+    runs-on: ubuntu-latest
 
-        env:
-            resource_group_name: Customer01-Int001-RG-Sandbox
-            location: Sweden Central
+    env:
+      resource_group_name: Customer01-Int001-RG-Sandbox
+      location: Sweden Central
 
-        steps:
-            - uses: actions/checkout@v2
+    steps:
+      - uses: actions/checkout@v2
 
-            - name: Azure Login
-              uses: Azure/login@v1
-              with:
-                creds: ${{secrets.AZURE_CREDENTIALS}}
+      - name: Azure Login
+        uses: Azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-            - name: Deploy Bicep
-              uses: azure/bicep-deploy@v1
-              with:
-                  type: deployment
-                  operation: create
-                  name: Development
-                  location: westus2
-                  scope: resourceGroup
-                  subscription-id: ${{env.subscriptionid}}
-                  resource-group-name: ${{env.resource_group_name}}
-                  template-file: ./bicep-templates/resourcegroup.bicep
-                  parameters:
-                    resourceGroupName="${{env.resource_group_name}}"
-                    location="${{env.location}}" 
+      - name: Deploy Bicep
+        uses: azure/bicep-deploy@v1
+        with:
+          type: deployment
+          operation: create
+          name: Development
+          location: westus2
+          scope: resourceGroup
+          subscription-id: ${{ env.subscriptionid }}
+          resource-group-name: ${{ env.resource_group_name }}
+          template-file: ./bicep-templates/resourcegroup.bicep
+          parameters: |
+            {
+              "resourceGroupName": "${{ env.resource_group_name }}",
+              "location": "${{ env.location }}"
+            }
