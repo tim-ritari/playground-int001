@@ -1,5 +1,5 @@
 resource namespaces_Common_ServiceBus_Sandbox_name_customer01_orders_queue 'Microsoft.ServiceBus/namespaces/queues@2023-01-01-preview' = {
-  parent: Common-ServiceBus-Sandbox
+  parent: 'Common-ServiceBus-Sandbox'
   name: 'customer01-orders-queue'
   location: 'swedencentral'
   properties: {
