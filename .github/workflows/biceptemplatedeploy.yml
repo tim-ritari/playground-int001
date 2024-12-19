@@ -43,7 +43,7 @@ jobs:
               "location": "${{ env.location }}"
             }
                     
-      - name: Deploy Logic App
+      - name: Deploy Logic App "Pub"
         uses: azure/bicep-deploy@v1
         with:
           type: deployment
@@ -53,3 +53,14 @@ jobs:
           subscription-id: ${{ env.subscriptionid }}
           resource-group-name: ${{ env.resource_group_name }}
           template-file: ./bicep-templates/logicapp-pub.bicep
+
+      - name: Deploy Logic App "Pub"
+        uses: azure/bicep-deploy@v1
+        with:
+          type: deployment
+          operation: create
+          name: Development
+          scope: resourceGroup
+          subscription-id: ${{ env.subscriptionid }}
+          resource-group-name: ${{ env.resource_group_name }}
+          template-file: ./bicep-templates/logicapp-sub.bicep
