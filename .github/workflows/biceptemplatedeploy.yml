@@ -17,6 +17,7 @@ jobs:
     env:
       resource_group_name: Customer01-Int001-RG-Sandbox
       location: swedencentral
+      subscriptionid: 0929d555-466f-4f2b-9354-a455f36b9732
 
     steps:
       - uses: actions/checkout@v2
@@ -54,7 +55,7 @@ jobs:
           resource-group-name: ${{ env.resource_group_name }}
           template-file: ./bicep-templates/logicapp-pub.bicep
 
-      - name: Deploy Logic App "Pub"
+      - name: Deploy Logic App "Sub"
         uses: azure/bicep-deploy@v1
         with:
           type: deployment
@@ -65,7 +66,7 @@ jobs:
           resource-group-name: ${{ env.resource_group_name }}
           template-file: ./bicep-templates/logicapp-sub.bicep
 
-      - name: Deploy Service Bus Queue
+      - name: Deploy Service Bus Namespace & Queue
         uses: azure/bicep-deploy@v1
         with:
           type: deployment
@@ -74,4 +75,4 @@ jobs:
           scope: resourceGroup
           subscription-id: ${{ env.subscriptionid }}
           resource-group-name: ${{ env.resource_group_name }}
-          template-file: ./bicep-templates/servicebus-queue.bicep          
+          template-file: ./bicep-templates/servicebus-ns-queue.bicep          
