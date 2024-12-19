@@ -43,7 +43,7 @@ jobs:
               "location": "${{ env.location }}"
             }
                     
-      - name: Deploy Logic App - "Customer01-Int01-Publish-LA"
+      - name: Deploy Logic App
         uses: azure/bicep-deploy@v1
         with:
           type: deployment
@@ -52,8 +52,4 @@ jobs:
           scope: resourceGroup
           subscription-id: ${{ env.subscriptionid }}
           resource-group-name: ${{ env.resource_group_name }}
-          template-file: ./bicep-templates/logicapp.bicep
-          parameters: |
-            {
-              "location": "${{ env.location }}"
-            }
+          template-file: ./bicep-templates/logicapp-pub.bicep
