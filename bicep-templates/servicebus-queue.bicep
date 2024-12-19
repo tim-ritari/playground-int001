@@ -2,12 +2,12 @@ param serviceBusNamespaceName string = 'Common-ServiceBus-Sandbox'
 param queueName string = 'customer01-orders-queue' 
 param location string = resourceGroup().location
 
-resource serviceBusNamespace 'Microsoft.ServiceBus/namespaces@2021-11-01-preview' existing = {
+resource serviceBusNamespace 'Microsoft.ServiceBus/namespaces@2024-01-01' existing = {
   name: serviceBusNamespaceName
 }
 
-resource serviceBusQueue 'Microsoft.ServiceBus/namespaces/queues@2021-11-01-preview' = {
-  name: '${serviceBusNamespace.name}/${queueName}'
+resource serviceBusQueue 'Microsoft.ServiceBus/namespaces/queues@2024-01-01' = {
+  name: queueName
   location: location
   properties: {
     maxMessageSizeInKilobytes: 256
